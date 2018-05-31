@@ -16,6 +16,22 @@ public class BookDAO {
     {
       jdbcConnection = connection;
     }
+    
+    public void updateBook(Book book) { 
+    	try {
+	    	PreparedStatement p = jdbcConnection
+	    			.prepareStatement("UPDATE book SET title = ?, author = ?, price = ? WHERE id = ?");
+	    	p.setString(1, book.getTitle());
+	    	p.setString(2, book.getAuthor());
+	    	p.setFloat(3, book.getPrice());
+	    	p.setInt(4, book.getId());
+	    	p.executeUpdate();
+	    	p.close();
+    	} catch (SQLException s)  {
+    		
+    	}
+    }
+    
     public void deleteBook(int id) {
     	try {
 	    	PreparedStatement p = jdbcConnection
