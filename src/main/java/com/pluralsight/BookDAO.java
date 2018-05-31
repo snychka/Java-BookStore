@@ -16,7 +16,17 @@ public class BookDAO {
     {
       jdbcConnection = connection;
     }
-
+    public void deleteBook(int id) {
+    	try {
+	    	PreparedStatement p = jdbcConnection
+	    			.prepareStatement("DELETE FROM book WHERE id = ?");
+	    	p.setInt(1, id);
+	    	p.executeUpdate();
+	    	p.close();
+    	} catch (SQLException s)  {
+    		
+    	}
+    }
     public Book getBook(int id) {
       Book book = null;
       String sql = "SELECT * FROM book WHERE id = ?";
